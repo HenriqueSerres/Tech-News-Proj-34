@@ -1,5 +1,5 @@
 import requests
-# import parsel
+import parsel
 from time import sleep
 
 
@@ -21,7 +21,11 @@ def fetch(url, timeout=3):
 
 # Requisito 2
 def scrape_novidades(html_content):
-    """Seu código deve vir aqui"""
+    selector = parsel.Selector(html_content)
+
+    titles_list = []
+    titles_list = selector.css(".entry-title a::attr(href)").getall()
+    return titles_list
 
 
 # Requisito 3
