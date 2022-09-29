@@ -14,7 +14,7 @@ def search_by_title(title):
 # Requisito 7
 def search_by_date(date):
     try:
-        the_date = datetime.fromisoformat(date).strftime("%d-%m-%Y")
+        the_date = datetime.fromisoformat(date).strftime("%d/%m/%Y")
         dates_result = search_news(
             {"timestamp": {"$regex": the_date, "$options": "i"}}
         )
