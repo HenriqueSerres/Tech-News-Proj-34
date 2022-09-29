@@ -6,7 +6,7 @@ from datetime import datetime
 # https://www.mongodb.com/docs/manual/reference/operator/query/regex/
 # Requisito 6
 def search_by_title(title):
-    the_news = search_news({"title": {"$regex": title}, "$options": "i"})
+    the_news = search_news({"title": {"$regex": title, "$options": "i"}})
     news_list = [(news["title"], news["url"]) for news in the_news]
     return news_list
 
@@ -16,7 +16,7 @@ def search_by_date(date):
     try:
         the_date = datetime.fromisoformat(date).strftime("%Y-%m-%d")
         dates_result = search_news(
-            {"timestamp": {"$regex": the_date}, "$options": "i"}
+            {"timestamp": {"$regex": the_date, "$options": "i"}}
         )
         dates_list = [(news["title"], news["url"]) for news in dates_result]
         return dates_list
@@ -26,7 +26,7 @@ def search_by_date(date):
 
 # Requisito 8
 def search_by_tag(tag):
-    tags_result = search_news({"tags": {"$regex": tag}, "$options": "i"})
+    tags_result = search_news({"tags": {"$regex": tag, "$options": "i"}})
     tags_list = [(news["title"], news["url"]) for news in tags_result]
     return tags_list
 
@@ -34,7 +34,7 @@ def search_by_tag(tag):
 # Requisito 9
 def search_by_category(category):
     category_result = search_news(
-        {"category": {"$regex": category}, "$options": "i"}
+        {"category": {"$regex": category, "$options": "i"}}
     )
     category_list = [(news["title"], news["url"]) for news in category_result]
     return category_list
