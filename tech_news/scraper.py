@@ -63,7 +63,8 @@ def get_tech_news(amount):
 
     while amount > len(news_urls):
         next_page = scrape_next_page_link(response)
-        news_urls.extend(scrape_novidades(next_page))
+        new_page = fetch(next_page)
+        news_urls.extend(scrape_novidades(new_page))
 
     for url in news_urls[:amount]:
         noticias = fetch(url)
