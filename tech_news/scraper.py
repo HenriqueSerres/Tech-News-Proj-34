@@ -61,15 +61,16 @@ def get_tech_news(amount):
     news_urls = scrape_novidades(response)
     news = list()
 
-    while amount > len(news_urls):
+    while amount >= len(news_urls):
         next_page = scrape_next_page_link(response)
-        new_page = fetch(next_page)
-        news_urls.extend(scrape_novidades(new_page))
+        response = fetch(next_page)
+        news_urls.extend(scrape_novidades(response))
 
     for url in news_urls[:amount]:
         noticias = fetch(url)
-        news.append(scrape_noticia(noticias))
-
+        news_formated = scrape_noticia(noticias)
+        news.append(news_formated)
+    print(len(news))
     create_news(news)
 
     return news
